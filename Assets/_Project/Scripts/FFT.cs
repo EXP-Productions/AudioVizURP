@@ -5,6 +5,13 @@ using UnityEngine.Experimental.AI;
 
 public class FFT : MonoBehaviour
 {
+    public enum Bands
+    {
+        Eight = 8,
+        SixtyFour = 64,
+    }
+
+
     AudioSource _AudioSource;
     public int _FrequencyBins = 512;
 

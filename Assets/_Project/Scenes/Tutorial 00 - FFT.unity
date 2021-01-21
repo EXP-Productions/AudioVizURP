@@ -242,6 +242,10 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: b2486b2dff72baf43b213f2a348c7eb4, type: 3}
+    - target: {fileID: 4191051259653168315, guid: 750dacde23fb146459be1c143ed945e0, type: 3}
+      propertyPath: _SmoothDownRate
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5786796491269081408, guid: 750dacde23fb146459be1c143ed945e0, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -396,6 +400,10 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 8580012c49ecf424b8f441205113458c, type: 3}
+    - target: {fileID: 4191051259653168315, guid: 750dacde23fb146459be1c143ed945e0, type: 3}
+      propertyPath: _SmoothDownRate
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5786796491269081408, guid: 750dacde23fb146459be1c143ed945e0, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -457,6 +465,10 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: e5691a9c89397c44ebefda977ca3eeab, type: 3}
+    - target: {fileID: 4191051259653168315, guid: 750dacde23fb146459be1c143ed945e0, type: 3}
+      propertyPath: _SmoothDownRate
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5786796491269081408, guid: 750dacde23fb146459be1c143ed945e0, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -535,7 +547,7 @@ MonoBehaviour:
   _FFT: {fileID: 1831831370}
   _FreqBands: 8
   _ObjectToSpawn: {fileID: 6559042431400347830, guid: bc32d564cc6f9364382fac8fbe9b3078, type: 3}
-  _Spacing: 0.3
+  _Spacing: 0.15
   _ScaleStrength: {x: 0, y: 8, z: 0}
 --- !u!4 &902381460
 Transform:
@@ -545,7 +557,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 902381458}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.8, y: 1.79, z: 0}
+  m_LocalPosition: {x: -1.5, y: 1.79, z: 0.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 145871714}
@@ -629,7 +641,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 907560302}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -2.37}
+  m_LocalPosition: {x: 0, y: 1.65, z: -2.37}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -810,6 +822,10 @@ PrefabInstance:
     - target: {fileID: 1099651345346203731, guid: 750dacde23fb146459be1c143ed945e0, type: 3}
       propertyPath: m_Name
       value: Synth
+      objectReference: {fileID: 0}
+    - target: {fileID: 4191051259653168315, guid: 750dacde23fb146459be1c143ed945e0, type: 3}
+      propertyPath: _SmoothDownRate
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5786796491269081408, guid: 750dacde23fb146459be1c143ed945e0, type: 3}
       propertyPath: m_RootOrder

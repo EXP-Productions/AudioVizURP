@@ -9,6 +9,7 @@ public class FFTToTexture : MonoBehaviour
     public Texture2D _FFTTexture;
     public FilterMode _FilterMode = FilterMode.Point;
     public Color _Col = Color.white;
+    public float _Strength = 10;
     Color[] _Colours;
 
     void Awake()
@@ -26,9 +27,9 @@ public class FFTToTexture : MonoBehaviour
         for (int i = 0; i < _Colours.Length; i++)
         {
             if (_Bands == FFT.Bands.Eight)
-                _Colours[i] = _FFT._FreqBands8[i] * _Col;
+                _Colours[i] = _FFT._FreqBands8[i] * _Col * _Strength;
             else
-                _Colours[i] = _FFT._FreqBands64[i] * _Col;
+                _Colours[i] = _FFT._FreqBands64[i] * _Col * _Strength;
         }
 
         _FFTTexture.SetPixels(_Colours);

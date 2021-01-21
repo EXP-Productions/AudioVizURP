@@ -16,10 +16,10 @@ public class FFT : MonoBehaviour
     public int _FrequencyBins = 512;
 
     public float[] _Samples;
+    public float[] _SampleBuffer;
 
     public float _SmoothDownRate = 0;
 
-    public float _Scalar = 1; 
     public bool _DrawGizmos = false;
 
     public float[] _FreqBands8;
@@ -34,6 +34,7 @@ public class FFT : MonoBehaviour
         _FreqBands8 = new float[8];
         _FreqBands64 = new float[64];
         _Samples = new float[_FrequencyBins];
+        _SampleBuffer = new float[_FrequencyBins];
     }
 
 
@@ -66,7 +67,7 @@ public class FFT : MonoBehaviour
             }
 
             average /= count;
-            _FreqBands8[i] = average * _Scalar;
+            _FreqBands8[i] = average;
         }
     }
 
@@ -104,7 +105,7 @@ public class FFT : MonoBehaviour
             }
 
             average /= count;
-            _FreqBands64[i] = average * _Scalar;
+            _FreqBands64[i] = average;
         }
     }
 
@@ -112,7 +113,16 @@ public class FFT : MonoBehaviour
     void Update()
     {
         //---   POPULATE SAMPLES
-        _AudioSource.GetSpectrumData(_Samples, 0, FFTWindow.BlackmanHarris);
+        _AudioSource.GetSpectrumData(_SampleBuffer, 0, FFTWindow.BlackmanHarris);
+
+        for (int i = 0; i < _Samples.Length; i++)
+        {
+            if (_SampleBuffer[i] > _Samples[i])
+                _Samples[i] = _SampleBuffer[i];
+            else
+                _Samples[i] = Mathf.Lerp(_Samples[i], _SampleBuffer[i], Time.deltaTime * _SmoothDownRate);
+        }
+
         UpdateFreqBands8();
         UpdateFreqBands64();
     }

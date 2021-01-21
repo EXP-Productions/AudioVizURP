@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.AI;
 
 public class FFT : MonoBehaviour
 {
     AudioSource _AudioSource;
-    public int _SampleCount = 512;
+    public int _FrequencyBins = 512;
 
     public float[] _Samples;
     public float[] _SamplesNormalized;
@@ -25,19 +26,28 @@ public class FFT : MonoBehaviour
 
     public bool _DrawGizmos = false;
 
+    public float[] _FreqBands;
+
     float _MaxLog = 0;
+    float naturalLog = 2.718281828459f;
+
+    public AnimationCurve _Curve;
+
+    public int _NumBands = 8;
 
     // Start is called before the first frame update
     void Start()
     {
         _AudioSource = GetComponent<AudioSource>();
 
-        //---   INITIALIZE ARRAYS
-        _Samples = new float[_SampleCount];
-        _SamplesNormalized = new float[_SampleCount];
-        _LogSamplesNormalized = new float[_SampleCount];
+        _FreqBands = new float[_NumBands];
 
-        for (int i = 0; i < _SampleCount; i++)
+        //---   INITIALIZE ARRAYS
+        _Samples = new float[_FrequencyBins];
+        _SamplesNormalized = new float[_FrequencyBins];
+        _LogSamplesNormalized = new float[_FrequencyBins];
+
+        for (int i = 0; i < _FrequencyBins; i++)
         {
             float logx = Mathf.Log(i);
             if (logx > _MaxLog)
@@ -46,12 +56,96 @@ public class FFT : MonoBehaviour
             //print(logx);
         }
 
-        for (int i = 0; i < _SampleCount; i++)
+
+        for (int i = 0; i < _FrequencyBins; i++)
         {
-            print(LinearToLogIndex(i));
+            float norm = (float)i / (_FrequencyBins - 1f);
+            float val = Mathf.Log(i) / _MaxLog;
+            //print(val);
+
+            float keyVal = norm;
+            keyVal = 1 - keyVal;
+            _Curve.AddKey(new Keyframe(keyVal, 1-val));
+
+            //float normalizedLog = Mathf.Log(i) / _MaxLog;
+            //float inverse = Mathf.Pow(naturalLog, normalizedLog);
+            //print(inverse);
+        }
+
+        for (int i = 0; i < _FrequencyBins; i++)
+        {
+            float norm = (float)i / (_FrequencyBins - 1f);
+            int index = (int)(_Curve.Evaluate(norm) * _FrequencyBins);
+            print(index);
+        }
+
+
+
+
+
+
+      
+    }
+
+
+    void MakeFreqBands()
+    {
+        // 22050 / 512 = 43hz per sample
+        // 10 - 60 hz
+        // 60 - 250
+        // 250 - 500
+        // 500 - 2000
+        // 2000 - 4000
+        // 4000 - 6000
+        // 6000 - 20000
+
+        int count = 0;
+        float scalar = 4;
+
+        for (int i = 0; i < _NumBands; i++)
+        {
+            float average = 0;
+            int sampleCount = (int)Mathf.Pow(2, i) * 2;
+
+            if(i == 7)
+            {
+                sampleCount += 2;
+            }
+
+            for (int j = 0; j < sampleCount; j++)
+            {
+                average += _Samples[count] * (count + 1);
+                count++;
+            }
+
+            average /= count;
+            _FreqBands[i] = average * scalar;
         }
     }
 
+    public float LinearIndexToLogSpacedValue(int index)
+    {
+        float freqSpacing = AudioSettings.outputSampleRate / 2 / _FrequencyBins;
+        float freq = index * freqSpacing;
+        float currentBark = 13 * Mathf.Atan(freq / 1315.8f) + 3.5f * Mathf.Atan(freq / 7518);
+        int currentBin = (int)(currentBark / 24 * (_FrequencyBins - 1));
+
+        currentBin = Mathf.Clamp(index, 0, _FrequencyBins - 1);
+
+        return _SamplesNormalized[currentBin];
+    }
+
+
+    public float GetValueAtScaledIndex(int i)
+    {
+        float norm = (float)i / (_FrequencyBins - 1f);
+        int index = (int)(_Curve.Evaluate(norm) * _FrequencyBins);
+        //print(index);
+
+        index = Mathf.Clamp(index, 0, _FrequencyBins-1);
+
+        return _Samples[index];
+    }
 
 
     // Update is called once per frame
@@ -74,12 +168,14 @@ public class FFT : MonoBehaviour
             _LogSamplesNormalized[i] = Mathf.InverseLerp(_MinLogSample, _MaxLogSample, Mathf.Log(_Samples[i]));
             _SamplesNormalized[i] = Mathf.InverseLerp(_MinSample, _MaxSample, _Samples[i]);
         }
+
+        MakeFreqBands();
     }
 
     int LinearToLogIndex(int index)
     {       
         float logPos = Mathf.Log(index);
-        return (int)(Mathf.InverseLerp(0, _MaxLog, logPos) * _SampleCount);
+        return (int)(Mathf.InverseLerp(0, _MaxLog, logPos) * _FrequencyBins);
     }
 
     private void OnDrawGizmos()
@@ -97,8 +193,8 @@ public class FFT : MonoBehaviour
             float logSample1;
             for (int i = 1; i < _Samples.Length - 1; i++)
             {
-                linearXPos0 = (float)(i - 1) / _SampleCount;
-                linearXPos1 = (float)(i) / _SampleCount;
+                linearXPos0 = (float)(i - 1) / _FrequencyBins;
+                linearXPos1 = (float)(i) / _FrequencyBins;
                 logXPos0 = Mathf.Log(i - 1);
                 logXPos1 = Mathf.Log(i);
 

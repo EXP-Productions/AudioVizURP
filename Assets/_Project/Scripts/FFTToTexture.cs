@@ -16,10 +16,11 @@ public class FFTToTexture : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        _FFTTexture = new Texture2D(_FFT._SampleCount, 1);
-        _FFTTexture.filterMode = _FilterMode;
+        _Colours = new Color[_FFT._NumBands];
 
-        _Colours = new Color[_FFT._SampleCount];
+        _FFTTexture = new Texture2D(_Colours.Length, 1);
+        _FFTTexture.filterMode = _FilterMode;
+        _FFTTexture.wrapMode = TextureWrapMode.Clamp;
     }
 
     // Update is called once per frame
@@ -27,7 +28,7 @@ public class FFTToTexture : MonoBehaviour
     {
         for (int i = 0; i < _FFTTexture.width; i++)
         {
-            float fftSample = _FFT._SamplesNormalized[i];
+            float fftSample = _FFT._FreqBands[i]; //_FFT.GetValueAtScaledIndex(i);// _FFT.LinearIndexToLogSpacedValue(i); //_FFT.GetValueAtScaledIndex(i);// _FFT._SamplesNormalized[i];
 
             _Colours[i] = _Col * fftSample;
         }

@@ -4,33 +4,37 @@ using UnityEngine;
 
 public class FFTToTexture : MonoBehaviour
 {
+    public enum Bands
+    {
+        Eight = 8,
+        SixtyFour = 64,
+    }
+
+    public Bands _Bands = Bands.Eight;
     public FFT _FFT;
     public Texture2D _FFTTexture;
-
     public FilterMode _FilterMode = FilterMode.Point;
-
     public Color _Col = Color.white;
-
     Color[] _Colours;
 
-    // Start is called before the first frame update
     void Awake()
     {
-        _Colours = new Color[_FFT._NumBands];
+        _Colours = new Color[(int)_Bands];      
 
         _FFTTexture = new Texture2D(_Colours.Length, 1);
         _FFTTexture.filterMode = _FilterMode;
         _FFTTexture.wrapMode = TextureWrapMode.Clamp;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        for (int i = 0; i < _FFTTexture.width; i++)
+        for (int i = 0; i < _Colours.Length; i++)
         {
-            float fftSample = _FFT._FreqBands[i]; //_FFT.GetValueAtScaledIndex(i);// _FFT.LinearIndexToLogSpacedValue(i); //_FFT.GetValueAtScaledIndex(i);// _FFT._SamplesNormalized[i];
-
-            _Colours[i] = _Col * fftSample;
+            if (_Bands == Bands.Eight)
+                _Colours[i] = _FFT._FreqBands8[i] * _Col;
+            else
+                _Colours[i] = _FFT._FreqBands64[i] * _Col;
         }
 
         _FFTTexture.SetPixels(_Colours);

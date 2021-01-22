@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class FFTObjectArray : MonoBehaviour
 {
-    public FFT _FFT;
-    public FFT.Bands _FreqBands = FFT.Bands.Eight;
+    public FrequencyBandAnalyser _FFT;
+    public FrequencyBandAnalyser.Bands _FreqBands = FrequencyBandAnalyser.Bands.Eight;
     FFTScale[] _FFTObjects;
 
     public FFTScale _ObjectToSpawn;

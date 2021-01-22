@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.AI;
 
-public class FFT : MonoBehaviour
+public class FrequencyBandAnalyser : MonoBehaviour
 {
     public enum Bands
     {
@@ -13,16 +13,18 @@ public class FFT : MonoBehaviour
 
 
     AudioSource _AudioSource;
-    public int _FrequencyBins = 512;
+    int _FrequencyBins = 512;
 
-    public float[] _Samples;
-    public float[] _SampleBuffer;
+    float[] _Samples;
+    float[] _SampleBuffer;
 
     public float _SmoothDownRate = 0;
 
     public bool _DrawGizmos = false;
 
+    [HideInInspector]
     public float[] _FreqBands8;
+    [HideInInspector]
     public float[] _FreqBands64;
 
 

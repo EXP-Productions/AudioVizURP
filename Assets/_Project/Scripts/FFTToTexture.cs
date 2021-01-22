@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class FFTToTexture : MonoBehaviour
 {
-    public FFT.Bands _Bands = FFT.Bands.Eight;
-    public FFT _FFT;
+    public FrequencyBandAnalyser.Bands _Bands = FrequencyBandAnalyser.Bands.Eight;
+    public FrequencyBandAnalyser _FFT;
     public Texture2D _FFTTexture;
     public FilterMode _FilterMode = FilterMode.Point;
     public Color _Col = Color.white;
@@ -26,7 +26,7 @@ public class FFTToTexture : MonoBehaviour
     {
         for (int i = 0; i < _Colours.Length; i++)
         {
-            if (_Bands == FFT.Bands.Eight)
+            if (_Bands == FrequencyBandAnalyser.Bands.Eight)
                 _Colours[i] = _FFT._FreqBands8[i] * _Col * _Strength;
             else
                 _Colours[i] = _FFT._FreqBands64[i] * _Col * _Strength;

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class FFTScale : MonoBehaviour
 {   
-    public FFT _FFT;
-    public FFT.Bands _FreqBands = FFT.Bands.Eight;
+    public FrequencyBandAnalyser _FFT;
+    public FrequencyBandAnalyser.Bands _FreqBands = FrequencyBandAnalyser.Bands.Eight;
     public int _FrequencyBandIndex = 0;
 
     Vector3 _BaseScale;

@@ -127,6 +127,19 @@ public class FFT : MonoBehaviour
         UpdateFreqBands64();
     }
 
+    public float GetBandValue(int index, Bands bands)
+    {
+        if(bands == Bands.Eight)
+        {
+            return _FreqBands8[index];
+        }
+        else
+        {
+            return _FreqBands64[index];
+        }
+
+    }
+
     //private void OnDrawGizmos()
     //{
     //    if (_DrawGizmos && Application.isPlaying)

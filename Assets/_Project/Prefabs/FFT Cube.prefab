@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2902130464677481806}
   - component: {fileID: 8470430901746336871}
   - component: {fileID: 8812115371706860679}
+  - component: {fileID: 7649325217232353167}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -59,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 84aa52da64aa21b4bafee2f5f223d0f7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -81,6 +82,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7649325217232353167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6589907926953661138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 893694692265ef141a02f0a9441fd27b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _FFT: {fileID: 0}
+  _FreqBands: 8
+  _FrequencyBandIndex: 0
+  _FloatName: _EmissionStrength
+  _StrengthScalar: 30
+  _MeshRenderer: {fileID: 8812115371706860679}
 --- !u!1 &8526311722076431218
 GameObject:
   m_ObjectHideFlags: 0

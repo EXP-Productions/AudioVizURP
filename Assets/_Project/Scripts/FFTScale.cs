@@ -18,6 +18,6 @@ public class FFTScale : MonoBehaviour
 
     void Update()
     {
-        transform.localScale = _BaseScale + (_ScaleStrength * _FFT._FreqBands8[_FrequencyBandIndex]);        
+        transform.localScale = _BaseScale + (_ScaleStrength * _FFT.GetBandValue(_FrequencyBandIndex, _FreqBands));        
     }
 }

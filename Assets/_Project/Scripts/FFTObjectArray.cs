@@ -41,12 +41,12 @@ public class FFTObjectArray : MonoBehaviour
         {
             float angle = i * angleSpacing;
             float x = Mathf.Sin(angle) * _Spacing;
-            float z = Mathf.Cos(angle) * _Spacing;
+            float y = Mathf.Cos(angle) * _Spacing;
 
 
             FFTScale newFFTObject = Instantiate(_ObjectToSpawn).GetComponent<FFTScale>();
             newFFTObject.transform.SetParent(transform);
-            newFFTObject.transform.localPosition = new Vector3(x, 0, z);
+            newFFTObject.transform.localPosition = new Vector3(x, y, 0);
 
             FFTSetMaterialFloat setMaterialFloat = newFFTObject.gameObject.GetComponentInChildren<FFTSetMaterialFloat>();
             if(setMaterialFloat != null)

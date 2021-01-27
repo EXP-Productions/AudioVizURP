@@ -19,6 +19,7 @@ public class FrequencyBandAnalyser : MonoBehaviour
     float[] _SampleBuffer;
 
     public float _SmoothDownRate = 0;
+    public float _Scalar = 1;
 
     public bool _DrawGizmos = false;
 
@@ -139,57 +140,26 @@ public class FrequencyBandAnalyser : MonoBehaviour
         {
             return _FreqBands64[index];
         }
-
     }
 
-    //private void OnDrawGizmos()
-    //{
-    //    if (_DrawGizmos && Application.isPlaying)
-    //    {
-    //        float linearXPos0;
-    //        float linearXPos1;
-    //        float logXPos0;
-    //        float logXPos1;
+    private void OnDrawGizmos()
+    {
+        if (_DrawGizmos && Application.isPlaying)
+        {
+            float linearXPos0;
+            float linearXPos1;
+            float yPos = transform.position.y;
 
-    //        float rawSample0;
-    //        float rawSample1;
-    //        float logSample0;
-    //        float logSample1;
-    //        for (int i = 1; i < _Samples.Length - 1; i++)
-    //        {
-    //            linearXPos0 = (float)(i - 1) / _FrequencyBins;
-    //            linearXPos1 = (float)(i) / _FrequencyBins;
-    //            logXPos0 = Mathf.Log(i - 1);
-    //            logXPos1 = Mathf.Log(i);
+            
 
-    //            rawSample0 = _Samples[i-1];
-    //            rawSample1 = _Samples[i];
+            for (int i = 1; i < 63; i++)
+            {
+                linearXPos0 = (float)(i - 1) / 63f;
+                linearXPos1 = (float)(i) / 63f;
 
-    //            logSample0 = Mathf.Log(rawSample0);
-    //            logSample1 = Mathf.Log(rawSample1);
-
-    //            Gizmos.color = Color.white;
-    //            //// X - Linear X spacing   Y - Raw sample
-    //            //Gizmos.DrawLine(new Vector3(linearXPos0, rawSample0 + 10, 0), new Vector3(linearXPos1, rawSample1 + 10, 0));
-
-    //            //// X - Linear X spacing   Y - Natural log sample
-    //            //Gizmos.DrawLine(new Vector3(linearXPos0, logSample0 + 10, 2), new Vector3(linearXPos1, logSample1 + 10, 2));
-
-    //            //// X - Natural log spacing   Y - Raw sample
-    //            //Gizmos.DrawLine(new Vector3(logXPos0, rawSample0 * _Scalar - 10, 1), new Vector3(logXPos1, rawSample1 * _Scalar - 10, 1));
-
-    //            //// X - Natural log spacing   Y - Natural Log sample
-    //            //Gizmos.DrawLine(new Vector3(logXPos0, logSample0, 3), new Vector3(logXPos1, logSample1, 3));
-
-    //            // X - Natural log spacing   Y - Raw sample
-    //            Gizmos.DrawLine(new Vector3(logXPos0, _SamplesNormalized[i - 1] * _Scalar - 20, 0), new Vector3(logXPos1, _SamplesNormalized[i] * _Scalar - 20, 0));
-
-    //            Gizmos.color = Color.blue;
-    //            // X - Linear spacing   Y - Raw sample
-    //            Gizmos.DrawLine(new Vector3(linearXPos0, _SamplesNormalized[i - 1] * _Scalar - 22, 0), new Vector3(linearXPos1, _SamplesNormalized[i] * _Scalar - 22, 0));
-    //        }
-
-    //        Gizmos.DrawLine(new Vector3(0, 0 * _Scalar - 20, 0), new Vector3(0, 1 * _Scalar - 20, 0));
-    //    }
-    //}
+                Gizmos.color = Color.white;
+                Gizmos.DrawLine(new Vector3(linearXPos0 * 4, _FreqBands64[i - 1] * _Scalar - yPos, 0), new Vector3(linearXPos1 * 4, _FreqBands64[i] * _Scalar - yPos, 0));
+            }
+        }
+    }
 }

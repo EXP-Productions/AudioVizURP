@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class FFTObjectArray : MonoBehaviour
 {
+    public enum Shape
+    {
+        Line,
+        Circle,
+    }
+
     public FrequencyBandAnalyser _FFT;
     public FrequencyBandAnalyser.Bands _FreqBands = FrequencyBandAnalyser.Bands.Eight;
-    GameObject[] _FFTGameObjects;
+    public GameObject[] _FFTGameObjects;
 
     public GameObject _ObjectToSpawn;
+
+    public Shape _Shape = Shape.Line;
 
     public float _Spacing = 1;
 
@@ -20,53 +28,44 @@ public class FFTObjectArray : MonoBehaviour
     {
         _FFTGameObjects = new GameObject[(int)_FreqBands];
         _BaseScale = _ObjectToSpawn.transform.localScale;
-        //---   LINEAR
-        for (int i = 0; i < (int)_FreqBands; i++)
+
+        if (_Shape == Shape.Line)
         {
-            GameObject newFFTObject = Instantiate(_ObjectToSpawn);
-            newFFTObject.transform.SetParent(transform);
-            newFFTObject.transform.localPosition = new Vector3(_Spacing * i, 0, 0);
-            _FFTGameObjects[i] = newFFTObject;
+            //---   LINEAR
+            for (int i = 0; i < _FFTGameObjects.Length; i++)
+            {
+                GameObject newFFTObject = Instantiate(_ObjectToSpawn);
+                newFFTObject.transform.SetParent(transform);
+                newFFTObject.transform.localPosition = new Vector3(_Spacing * i, 0, 0);
+                _FFTGameObjects[i] = newFFTObject;
+            }
         }
+        else if(_Shape == Shape.Circle)
+        {
+            float angleSpacing = (2f * Mathf.PI) / (int)_FreqBands;
+            //---   CIRCULAR
+            for (int i = 0; i < _FFTGameObjects.Length; i++)
+            {
+                float angle = i * angleSpacing;
+                float x = Mathf.Sin(angle) * _Spacing;
+                float y = Mathf.Cos(angle) * _Spacing;
+
+                GameObject newFFTObject = Instantiate(_ObjectToSpawn);
+                newFFTObject.transform.SetParent(transform);
+                newFFTObject.transform.localPosition = new Vector3(x, y, 0);
 
 
-        //float angleSpacing = (2f * Mathf.PI) / _FFTObjects.Length;
-        ////---   CIRCULAR
-        //for (int i = 0; i < _FFTObjects.Length; i++)
-        //{
-        //    float angle = i * angleSpacing;
-        //    float x = Mathf.Sin(angle) * _Spacing;
-        //    float y = Mathf.Cos(angle) * _Spacing;
+                //---   ROTATION
+                newFFTObject.transform.LookAt(transform.position);
+                newFFTObject.transform.localRotation *= Quaternion.Euler(-90, 0, 0);
 
-
-        //    FFTScale newFFTObject = Instantiate(_ObjectToSpawn).GetComponent<FFTScale>();
-        //    newFFTObject.transform.SetParent(transform);
-        //    newFFTObject.transform.localPosition = new Vector3(x, y, 0);
-
-        //    FFTSetMaterialFloat setMaterialFloat = newFFTObject.gameObject.GetComponentInChildren<FFTSetMaterialFloat>();
-        //    if(setMaterialFloat != null)
-        //    {
-        //        setMaterialFloat._FFT = _FFT;
-        //        setMaterialFloat._FreqBands = _FreqBands;
-        //        setMaterialFloat._FrequencyBandIndex = i;
-        //    }
-
-        //    //---   ROTATION
-        //    newFFTObject.transform.LookAt(transform.position);
-        //    newFFTObject.transform.localRotation *= Quaternion.Euler(-90,0,0);
-
-        //    newFFTObject._FFT = _FFT;
-        //    newFFTObject._FreqBands = _FreqBands;
-        //    newFFTObject._FrequencyBandIndex = i;
-        //    newFFTObject._ScaleStrength = _ScaleStrength;
-
-        //    _FFTObjects[i] = newFFTObject;
-        //}
+                _FFTGameObjects[i] = newFFTObject;
+            }
+        }
     }
 
     private void Update()
     {
-        //---   LINEAR
         for (int i = 0; i < _FFTGameObjects.Length; i++)
         {
             _FFTGameObjects[i].transform.localScale = _BaseScale + (_ScaleStrength * _FFT.GetBandValue(i, _FreqBands));

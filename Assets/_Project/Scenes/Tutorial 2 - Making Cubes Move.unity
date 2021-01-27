@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &343398346 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 933234023298266406, guid: 3d1ead51b325a3e40a178d5cd394493b, type: 3}
+  m_PrefabInstance: {fileID: 5436297070210769785}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a36d36592130b5f46ba043726799ded1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &907560302
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,6 +250,54 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1 &1365622270
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1365622272}
+  - component: {fileID: 1365622271}
+  m_Layer: 0
+  m_Name: FFT Array - Drums
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1365622271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365622270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9625c71bf2ea35942861f791ed5a8a02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _FFT: {fileID: 343398346}
+  _FreqBands: 64
+  _ObjectToSpawn: {fileID: 6559042431400347830, guid: bc32d564cc6f9364382fac8fbe9b3078, type: 3}
+  _Spacing: 0.11
+  _ScaleStrength: {x: 0, y: 8, z: 0}
+--- !u!4 &1365622272
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365622270}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2312348848773121040
 PrefabInstance:
   m_ObjectHideFlags: 0

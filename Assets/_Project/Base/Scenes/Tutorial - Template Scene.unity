@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.32310706, g: 0.32404658, b: 0.33032724, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -313,11 +313,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1552527024309042783, guid: 3d1ead51b325a3e40a178d5cd394493b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 1552527024309042783, guid: 3d1ead51b325a3e40a178d5cd394493b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 1552527024309042783, guid: 3d1ead51b325a3e40a178d5cd394493b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -364,16 +364,32 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4802619347881622369, guid: 3d1ead51b325a3e40a178d5cd394493b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802619347881622369, guid: 3d1ead51b325a3e40a178d5cd394493b, type: 3}
       propertyPath: m_LocalPosition.y
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5831606143212876677, guid: 3d1ead51b325a3e40a178d5cd394493b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5831606143212876677, guid: 3d1ead51b325a3e40a178d5cd394493b, type: 3}
       propertyPath: m_LocalPosition.y
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6607018891173083690, guid: 3d1ead51b325a3e40a178d5cd394493b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6607018891173083690, guid: 3d1ead51b325a3e40a178d5cd394493b, type: 3}
       propertyPath: m_LocalPosition.y
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017198713810273272, guid: 3d1ead51b325a3e40a178d5cd394493b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7017198713810273272, guid: 3d1ead51b325a3e40a178d5cd394493b, type: 3}
       propertyPath: m_LocalPosition.y

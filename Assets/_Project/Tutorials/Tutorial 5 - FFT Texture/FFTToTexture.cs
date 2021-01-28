@@ -12,6 +12,9 @@ public class FFTToTexture : MonoBehaviour
     public float _Strength = 10;
     Color[] _Colours;
 
+    public Material _Material;
+    public string _TextureName = "_BaseMap";
+
     void Awake()
     {
         _Colours = new Color[(int)_Bands];      
@@ -19,6 +22,8 @@ public class FFTToTexture : MonoBehaviour
         _FFTTexture = new Texture2D(_Colours.Length, 1);
         _FFTTexture.filterMode = _FilterMode;
         _FFTTexture.wrapMode = TextureWrapMode.Clamp;
+
+        _Material.SetTexture(_TextureName, _FFTTexture);
     }
 
 

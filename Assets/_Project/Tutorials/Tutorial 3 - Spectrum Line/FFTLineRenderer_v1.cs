@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
-public class FFTLineRenderer : MonoBehaviour
+public class FFTLineRenderer_v1 : MonoBehaviour
 {
     public FrequencyBandAnalyser _FFT;
     public FrequencyBandAnalyser.Bands _FreqBandCount;

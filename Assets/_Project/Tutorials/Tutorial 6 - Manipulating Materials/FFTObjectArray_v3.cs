@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FFTObjectArray : MonoBehaviour
+public class FFTObjectArray_v3 : MonoBehaviour
 {
     public enum Shape
     {
@@ -10,18 +10,23 @@ public class FFTObjectArray : MonoBehaviour
         Circle,
     }
 
+    [Header("FFT")]
     public FrequencyBandAnalyser _FFT;
     public FrequencyBandAnalyser.Bands _FreqBands = FrequencyBandAnalyser.Bands.Eight;
-    public GameObject[] _FFTGameObjects;
-
+    GameObject[] _FFTGameObjects;
     public GameObject _ObjectToSpawn;
 
+
+    [Header("Object Array")]
     public Shape _Shape = Shape.Line;
-
     public float _Spacing = 1;
-
     public Vector3 _ScaleStrength = Vector3.up;
     Vector3 _BaseScale;
+
+
+    [Header("Emission col")]
+    public Color _EmissionCol;
+    public float _EmissionStrength = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -61,6 +66,18 @@ public class FFTObjectArray : MonoBehaviour
 
                 _FFTGameObjects[i] = newFFTObject;
             }
+        }
+
+        // APPLY SET MAT COL COMPONENT
+        for (int i = 0; i < _FFTGameObjects.Length; i++)
+        {
+            FFTSetMaterialColour setMaterialCol = _FFTGameObjects[i].AddComponent<FFTSetMaterialColour>();
+            setMaterialCol._Col = _EmissionCol;
+            setMaterialCol._StrengthScalar = _EmissionStrength;
+
+            setMaterialCol._FFT = _FFT;
+            setMaterialCol._FreqBands = _FreqBands;
+            setMaterialCol._FrequencyBandIndex = i;
         }
     }
 

@@ -148,17 +148,16 @@ public class FrequencyBandAnalyser : MonoBehaviour
         {
             float linearXPos0;
             float linearXPos1;
-            float yPos = transform.position.y;
 
             
 
             for (int i = 1; i < 63; i++)
             {
-                linearXPos0 = (float)(i - 1) / 63f;
+                linearXPos0 =  (float)(i - 1) / 63f;
                 linearXPos1 = (float)(i) / 63f;
 
                 Gizmos.color = Color.white;
-                Gizmos.DrawLine(new Vector3(linearXPos0 * 4, _FreqBands64[i - 1] * _Scalar - yPos, 0), new Vector3(linearXPos1 * 4, _FreqBands64[i] * _Scalar - yPos, 0));
+                Gizmos.DrawLine(transform.position + new Vector3(linearXPos0 * 4, _FreqBands64[i - 1] * _Scalar, 0), transform.position + new Vector3(linearXPos1 * 4, _FreqBands64[i] * _Scalar, 0));
             }
         }
     }

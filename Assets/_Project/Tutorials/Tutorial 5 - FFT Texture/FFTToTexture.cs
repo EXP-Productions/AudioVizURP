@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FFTToTexture : MonoBehaviour
-{
-    public FrequencyBandAnalyser.Bands _Bands = FrequencyBandAnalyser.Bands.Eight;
+{   
     public FrequencyBandAnalyser _FFT;
-    public Texture2D _FFTTexture;
-    public FilterMode _FilterMode = FilterMode.Point;
-    public Color _Col = Color.white;
+    public FrequencyBandAnalyser.Bands _Bands = FrequencyBandAnalyser.Bands.Eight;
     public float _Strength = 10;
+
+    public Texture2D _FFTTexture;
     Color[] _Colours;
+    public Color _Col = Color.white;
 
     public Material _Material;
     public string _TextureName = "_BaseMap";
@@ -20,7 +20,7 @@ public class FFTToTexture : MonoBehaviour
         _Colours = new Color[(int)_Bands];      
 
         _FFTTexture = new Texture2D(_Colours.Length, 1);
-        _FFTTexture.filterMode = _FilterMode;
+        _FFTTexture.filterMode = FilterMode.Point;
         _FFTTexture.wrapMode = TextureWrapMode.Clamp;
 
         _Material.SetTexture(_TextureName, _FFTTexture);

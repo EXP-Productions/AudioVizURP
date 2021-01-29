@@ -18,7 +18,7 @@ public class FFTObjectArray_v2 : MonoBehaviour
 
     public Shape _Shape = Shape.Line;
 
-    public float _Spacing = 1;
+    public float _SpacingRadius = 1;
 
     public Vector3 _ScaleStrength = Vector3.up;
     Vector3 _BaseScale;
@@ -36,7 +36,7 @@ public class FFTObjectArray_v2 : MonoBehaviour
             {
                 GameObject newFFTObject = Instantiate(_ObjectToSpawn);
                 newFFTObject.transform.SetParent(transform);
-                newFFTObject.transform.localPosition = new Vector3(_Spacing * i, 0, 0);
+                newFFTObject.transform.localPosition = new Vector3(_SpacingRadius * i, 0, 0);
                 _FFTGameObjects[i] = newFFTObject;
             }
         }
@@ -47,8 +47,8 @@ public class FFTObjectArray_v2 : MonoBehaviour
             for (int i = 0; i < _FFTGameObjects.Length; i++)
             {
                 float angle = i * angleSpacing;
-                float x = Mathf.Sin(angle) * _Spacing;
-                float y = Mathf.Cos(angle) * _Spacing;
+                float x = Mathf.Sin(angle) * _SpacingRadius;
+                float y = Mathf.Cos(angle) * _SpacingRadius;
 
                 GameObject newFFTObject = Instantiate(_ObjectToSpawn);
                 newFFTObject.transform.SetParent(transform);

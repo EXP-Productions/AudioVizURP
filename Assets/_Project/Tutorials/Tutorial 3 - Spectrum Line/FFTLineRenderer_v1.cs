@@ -35,7 +35,6 @@ public class FFTLineRenderer_v1 : MonoBehaviour
     {
         for (int i = 0; i < _Line.positionCount; i++)
         {
-            float normPosition = i / (float)_Line.positionCount;
             float xPos = i * _Spacing;
             float yPos = _FFT.GetBandValue(i, _FreqBandCount) * _Strength;
 
